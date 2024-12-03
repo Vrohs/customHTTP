@@ -1,0 +1,11 @@
+DNS runs on UDP, the client sends a single request message and the server responds with a single response message. A DNS message is encapsulated in a UDP packet.
+
+
+| IP header |         IP payload           |
+            \............................../
+             | UDP header |  UDP payload  |
+                          \.............../
+                           | DNS message |
+
+
+Due to the drawbacks of packet-based protocols, e.g., the inability to use large messages, DNS is also designed to run on TCP. But TCP knows nothing about “message”, so when sending DNS messages over TCP, a 2-byte length field is prepended to each DNS message so that the server or client can tell which part of the byte stream is which message. This 2-byte length field is the simplest example of an application protocol on top of TCP. This protocol allows for multiple application messages (DNS) in a single TCP byte stream.
